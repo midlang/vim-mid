@@ -17,7 +17,7 @@ syn keyword midTodo       contained TODO FIXME XXX
 syn cluster midCommentGrp contains=midTodo
 
 syn keyword midKeyword    syntax import option
-syn keyword midKeyword    package message group oneof protocol enum bean struct 
+syn keyword midKeyword    package message group oneof protocol enum bean struct const
 syn keyword midKeyword    optional required repeated
 syn keyword midKeyword    default
 syn keyword midExtend     extend extensions to max
