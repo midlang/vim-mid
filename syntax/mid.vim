@@ -2,9 +2,6 @@
 "   au! BufRead,BufNewFile *.mid setfiletype mid
 " augroup end
 "
-" Or just create a new file called ~/.vim/ftdetect/mid.vim with the
-" previous lines on it.
-
 if version < 600
   syntax clear
 elseif exists("b:current_syntax")
@@ -20,13 +17,13 @@ syn keyword midKeyword    syntax import option
 syn keyword midKeyword    package message group oneof protocol enum bean struct const
 syn keyword midKeyword    optional required repeated
 syn keyword midKeyword    default
-syn keyword midExtend     extend extensions to max
+syn keyword midExtend     extends extensions to max
 syn keyword midRPC        service rpc returns
 
 syn keyword midType      int32 int64 uint32 uint64 sint32 sint64 int8 int16 uint8 uint16 int uint
 syn keyword midType      fixed32 fixed64 sfixed32 sfixed64
-syn keyword midType      float double bool string bytes float32 float64
-syn keyword midTypedef   vector map list array
+syn keyword midType      float double bool string bytes float32 float64 byte
+syn keyword midTypedef   vector map array
 syn keyword midBool      true false
 
 syn match   midInt     /-\?\<\d\+\>/
@@ -48,10 +45,13 @@ syn match midEnum  /\(enum\s\+\)\@<=\w\+\({\)\@=/
 syn match midStruct  /\(struct\s\+\)\@<=\w\+\(\s\+{\)\@=/
 syn match midStruct  /\(struct\s\+\)\@<=\w\+\({\)\@=/
 
+  
+syn match midFunction /\w\+\ze(/
+hi def link midFunction          Function
 
-if version >= 508 || !exists("did_proto_syn_inits")
+if version >= 508 || !exists("did_mid_syn_inits")
   if version < 508
-    let did_proto_syn_inits = 1
+    let did_mid_syn_inits = 1
     command -nargs=+ HiLink hi link <args>
   else
     command -nargs=+ HiLink hi def link <args>
@@ -83,4 +83,4 @@ if version >= 508 || !exists("did_proto_syn_inits")
   delcommand HiLink
 endif
 
-let b:current_syntax = "proto"
+let b:current_syntax = "mid"
